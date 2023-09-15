@@ -1,6 +1,9 @@
-/* Body.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .banner-container {
-    background-image: url('/Users/pabloledezma/Desktop/skynet/frontend/src/assets/images/laser.gif');
+    background-image: url('https://i.postimg.cc/SssH8Tgz/scan-laser.gif');
     background-size: cover; /* Ajustar el tamaño del fondo para cubrir el contenedor */
     background-repeat: no-repeat; /* Evitar que el fondo se repita */
     background-attachment: fixed; /* Fijar el fondo para que no se desplace con el contenido */
@@ -9,7 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 600px;
+    height: 400px;
 }
 
 .banner {
