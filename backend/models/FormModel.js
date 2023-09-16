@@ -1,14 +1,13 @@
-// models/FormModel.js
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-const formSchema = new Schema({
-  title: String,
-  description: String,
-  fields: [{ name: String, type: String, required: Boolean }],
+const formSchema = new mongoose.Schema({
+  Email: String,
+  Name: String,
+  Subjet: String,
+  Message: String,
   // Otros campos específicos del formulario, si es necesario
 });
 
-const Form = mongoose.model('Form', formSchema);
+const Form = mongoose.model("Form", formSchema);
 
-module.exports = Form;
+export default Form;

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 dotenv.config();
 const secretKey = process.env.SECRET_KEY 
@@ -33,7 +33,7 @@ export const requireAuth = (req, res, next) => {
 export const generateToken = (req) => {
       try { 
         const {_id, email, role} = req
-        const createToken = jwt.sign ( {_id, email, role}, secret_key, {expressIn:tokenExpirationTime})
+        const createToken = jwt.sign ( {_id, email, role}, secretKey, {expressIn:tokenExpirationTime})
         req.token= createToken
       } catch (error) {
         console.error ("error al generar token ")

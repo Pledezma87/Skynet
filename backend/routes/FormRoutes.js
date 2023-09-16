@@ -1,17 +1,27 @@
-// src/routes/index.js
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Login from '../components/Login.jsx';
-import Register from '../components/Register.jsx';
+import express from "express";
+import {
+  createForm,
+  getAllForms,
+  getFormById,
+  updateFormById,
+  deleteFormById,
+} from "../controllers/FormController.js";
 
-const Routes = () => {
-  return (
-    <Switch>
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-      {/* Otras rutas si es necesario */}
-    </Switch>
-  );
-};
+//ruta para ingresar formulario
+const formRouter = express.Router();
+// Ruta para crear un nuevo formulario
+formRouter.post("/", createForm);
 
-export default Routes;
+// Ruta para obtener todos los formularios
+formRouter.get("/", getAllForms);
+
+// Ruta para obtener un formulario por su ID
+formRouter.get("/:id", getFormById);
+
+// Ruta para actualizar un formulario por su ID
+formRouter.put("/:id", updateFormById);
+
+// Ruta para eliminar un formulario por su ID
+formRouter.delete("/:id", deleteFormById);
+
+export default formRouter;
