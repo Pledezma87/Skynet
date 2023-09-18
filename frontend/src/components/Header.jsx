@@ -14,7 +14,7 @@ function Header() {
       </div>
       <div className="space-x-4">
         <button className="text-lg bg-[#121212] hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
-          Home
+          Login 
         </button>
         <button className="text-lg bg-[#121212] hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
           Register
