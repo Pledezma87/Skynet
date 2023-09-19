@@ -40,4 +40,10 @@ export const generateToken = (req) => {
       }
     }
 
+// Middleware de manejo de errores global
+export const errorHandler = (err, res) => {
+  // Enviar una respuesta de error con código 500 y un mensaje genérico
+  res.status(500).json({ message: "Ha ocurrido un error en la aplicación." });
+};
+
 

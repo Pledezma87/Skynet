@@ -24,12 +24,10 @@ export const createForm = async (req, res) => {
   }
 };
 
-
 // Obtener todos los formularios
-export const getAllForms = async (req, res, next) => { 
+export const getAllForms = async (req, res, next) => {
   try {
     const forms = await Form.find();
-    console.log(forms);
     res.status(202).json(forms);
   } catch (error) {
     res.status(500).json({ message: "Error al obtener los formularios." });
@@ -42,7 +40,7 @@ export const getFormById = async (req, res) => {
     const { id } = req.params;
     const form = await Form.findById(id);
 
-    if (!form) {
+    if (form === null) {
       return res.status(404).json({ message: "Formulario no encontrado." });
     }
 
@@ -64,47 +62,26 @@ export const updateFormById = async (req, res) => {
       return res.status(404).json({ message: "Formulario no encontrado." });
     }
 
-    res
-      .status(200)
-      .json({
-        message: "Formulario actualizado con éxito.",
-        form: updatedForm,
-      });
+    res.status(200).json({
+      message: "Formulario actualizado con éxito.",
+      form: updatedForm,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error al actualizar el formulario." });
   }
 };
 
-// // Eliminar un formulario por su ID
-// export const deleteFormById = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const deletedForm = await Form.findByIdAndDelete(id);
-
-//     if (!deletedForm) {
-//       return res.status(404).json({ message: "Formulario no encontrado." });
-//     }
-
-//     res.status(204).end({message: "Formulario eliminado con exito"}); // 204 significa "No Content"
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Error al eliminar el formulario." });
-//   }
-// };
-
 export const deleteFormById = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedForm = await Form.findByIdAndDelete(id);
-
     if (deletedForm === null) {
       return res.status(404).json({ message: "Formulario no encontrado." });
     }
 
-    res.status(200).json({ message: "Formulario eliminado con éxito."}); 
+    res.status(200).json({ message: "Formulario eliminado con éxito." });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al eliminar el formulario." });
   }
 };
-

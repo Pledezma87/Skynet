@@ -32,7 +32,7 @@ export const createUser = async (req, res, next) => {
     await user.save();
     res.status(201).json(user);
   } catch (error) {
-    console.log("error al crear ususario");
+    res.status(500).json({ message: "Error al crear el usuario." });
   }
 };
 
@@ -64,7 +64,9 @@ export const getUserById = async (req, res) => {
 export const updateUserById = async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     if (!updatedUser) {
       return res.status(404).json({ message: "Usuario no encontrado." });
     }
@@ -79,10 +81,11 @@ export const deleteUserById = async (req, res) => {
   const { id } = req.params;
   try {
     const deletedUser = await User.findByIdAndDelete(id);
+    console.log(deletedUser)
     if (!deletedUser) {
       return res.status(404).json({ message: "Usuario no encontrado." });
     }
-    res.status(200).end({ message: "Usuario creado con exito." }); 
+    res.status(200).json({ message: "Usuario Eliminado con exito." });
   } catch (error) {
     res.status(500).json({ message: "Error al eliminar el usuario." });
   }
