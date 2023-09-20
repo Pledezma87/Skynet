@@ -1,4 +1,3 @@
-// src/components/Register.js
 import React, { useState } from 'react';
 
 const Register = () => {
@@ -17,7 +16,7 @@ const Register = () => {
 
   return (
     <div>
-      <h1>Registro</h1>
+      <h1>Register</h1>
       <input
         type="text"
         placeholder="Nombre"

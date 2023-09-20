@@ -1,6 +1,7 @@
 import "tailwindcss/tailwind.css";
-
+import { Link } from 'react-router-dom';
 import React from "react";
+
 
 function Header() {
   return (
@@ -13,12 +14,20 @@ function Header() {
         />
       </div>
       <div className="space-x-4">
-        <button className="text-lg bg-[#121212] hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
-          Login 
-        </button>
-        <button className="text-lg bg-[#121212] hover:bg-red-900 text-white font-bold py-2 px-4 rounded">
-          Register
-        </button>
+        <Link to="/login">
+          <button
+            className="border border-red-700 navbar-toggler text-lg bg-[#121212] hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
+          >
+            Login
+          </button>
+        </Link>
+        <Link to="/register">
+          <button
+            className="border border-red-700 navbar-toggler text-lg bg-[#121212] hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
+          >
+            Register
+          </button>
+        </Link>
       </div>
     </div>
   );
