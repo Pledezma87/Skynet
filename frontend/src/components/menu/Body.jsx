@@ -1,7 +1,5 @@
 import "tailwindcss/tailwind.css";
-// import '../script.js'
-import "../styles/Body.css";
-// src/components/Home.js
+import "../../styles/Body.css";
 import React, { useState, useEffect } from "react";
 
 const ataquesVirtualesConocidos = [
@@ -29,7 +27,7 @@ function Body() {
 
   return (
     <div className="bg-[#121212] w-screen h-[550px] ">
-        <div className="banner">
+        <div className="text-red-900 text-center banner">
         <p id="mensaje">{ataquesVirtualesConocidos[indice]}</p>
       </div>
       <div className="banner-container"></div>

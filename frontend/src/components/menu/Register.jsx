@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+// import {createUser} from '../../utils/Api.js';
+import axios from 'axios';
+// añadir estilos 
+const BASE_URL = "http://localhost:8000"; //  URL de tu servidor backend
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -9,7 +13,12 @@ const Register = () => {
     confirmPassword: '',
   });
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    console.log("entra en handle")
+    const response = await axios.post(`${BASE_URL}/user/`, userData);
+    console.log(response.data)
+
+
     // Envía los datos del usuario al backend para el registro
     // Realiza validación si es necesario
   };

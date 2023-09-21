@@ -1,6 +1,6 @@
 import React from "react";
-import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
+import Login from "./components/menu/Login.jsx";
 import Register from "./pages/Register.jsx";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 

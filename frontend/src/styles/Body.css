@@ -17,7 +17,7 @@
 
 .banner {
     background-color:#121212; /* Fondo semitransparente para hacer el texto más legible */
-    color: #fff;
+    color: rgb(125, 2, 2);
     padding: 10px;
     text-align: center;
     font-size: 18px;

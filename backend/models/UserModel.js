@@ -30,14 +30,6 @@ const userSchema = new mongoose.Schema({
     }
   },
 
-  role: {
-    type: String,
-    enum: ["User", "Admin"],
-    default: "User",
-    trim: true,
-    lowercase: true,
-  },
-
   email: {
     type: String,
     unique: true,
@@ -55,15 +47,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 12,
-    validate: {
-      validator: function (value) {
-        return /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-\\/]+$/u.test(value);
-      },
-      message: "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial."
-    }
-  }
+    // validate: {
+    //   validator: function (value) {
+    //     return /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-\\/]+$/u.test(value);
+    //   },
+    //   message: "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial."
+    // }
+  },
+
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+    trim: true,
+    lowercase: true,
+  },
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema,"users");
 
 export default User;

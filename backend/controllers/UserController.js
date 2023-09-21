@@ -27,11 +27,19 @@ export const login = async (req, res) => {
 
 // Crear (Create) - crear usuarios
 export const createUser = async (req, res, next) => {
+  console.log("entra crear usuario")
   try {
     const user = new User(req.body);
-    await user.save();
-    res.status(201).json(user);
+  try {
+    const usersave = await user.save();
+    console.log(usersave)
+    res.status(200).json(usersave);
   } catch (error) {
+    console.log(error)
+  }
+
+  } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Error al crear el usuario." });
   }
 };
