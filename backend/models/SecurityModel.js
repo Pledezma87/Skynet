@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+/* import mongoose from "mongoose";
 
 const securitySchema = new mongoose.Schema({
   // Puedes definir los campos específicos de seguridad aquí
@@ -7,4 +7,4 @@ const securitySchema = new mongoose.Schema({
 
 const Security = mongoose.model("Security", securitySchema);
 
-export default Security;
+export default Security; */

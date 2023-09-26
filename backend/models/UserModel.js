@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 100,
+    maxlength: 80,
     lowercase: true,
     validate: {
       validator: function (value) {
@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 100,
+    maxlength: 80,
     lowercase: true,
     validate: {
       validator: function (value) {
@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     trim: true,
+    maxlength: 100,
     lowercase: true,
     validate: {
       validator: function (value) {
@@ -47,20 +48,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 12,
-    // validate: {
-    //   validator: function (value) {
-    //     return /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-\\/]+$/u.test(value);
-    //   },
-    //   message: "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial."
-    // }
+    validate: {
+      validator: function (value) {
+        return /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\-\\/]+$/u.test(value);
+      },
+      message: "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial."
+    }
   },
 
   role: {
     type: String,
     enum: ["user", "admin"],
     default: "user",
-    trim: true,
-    lowercase: true,
   },
 });
 

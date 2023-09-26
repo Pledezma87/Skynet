@@ -16,10 +16,6 @@ function Register() {
 
   const handleRegister = async () => {
   const userRespose = await createUser(userData)
-  console.log(userRespose)
-    // console.log("entra en handle");
-    // const response = await axios.post(`${BASE_URL}/user/`, userData);
-    // console.log(response.data);
   };
 
   return (

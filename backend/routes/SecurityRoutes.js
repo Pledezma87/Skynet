@@ -1,4 +1,4 @@
-import express from "express";
+/* import express from "express";
 import { login, register, refreshToken } from "../controllers/SecurityController.js";
 
 const securityRouter = express.Router();
@@ -13,3 +13,4 @@ securityRouter.post("/register", register);
 securityRouter.post("/refresh-token", refreshToken);
 
 export default securityRouter;
+ */

@@ -53,7 +53,6 @@ export const getFormList = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/form`);
       return response.data;
-    
     } catch (error) {
       throw error;
     }
@@ -90,7 +89,6 @@ export const getFormList = async () => {
   
   export const createUser = async (userData) => {
     try {
-        console.log("entra en crear usuario")
       const response = await axios.post(`${BASE_URL}/user/`, userData);
       return response.data;
     } catch (error) {

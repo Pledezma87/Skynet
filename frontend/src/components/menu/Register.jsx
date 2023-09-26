@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-// import {createUser} from '../../utils/Api.js';
 import axios from 'axios';
-// añadir estilos 
-const BASE_URL = "http://localhost:8000"; //  URL de tu servidor backend
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -11,16 +10,53 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    hiddenField1: '', // Agrega los campos ocultos necesarios
+    hiddenField2: '', // Agrega los campos ocultos necesarios
   });
 
-  const handleRegister = async () => {
-    console.log("entra en handle")
-    const response = await axios.post(`${BASE_URL}/user/`, userData);
-    console.log(response.data)
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value }); // Usa setUserData en lugar de setCredentials
+  };
 
-    // Envía los datos del usuario al backend para el registro
-    // Realiza validación si es necesario
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    if (userData.hiddenField1 || userData.hiddenField2) { // Accede a los campos ocultos de userData
+      setError({ error: 'Error interno en el servidor' });
+    }
+
+    if (!recaptchaValue) {
+      setError('Complete el captcha');
+    } else {
+      setError(null);
+      setLoading(true);
+
+      try {
+        Register (userData,navigate,setError,setLoading)
+      } catch (error) {
+        console.error('Error al registarse:', error);
+        setError('Error al registrarse. Intente nuevamente más tarde.');
+        setLoading(false);
+      }
+        // Ejemplo de llamada a la API usando axios:
+        await axios.post(`${BASE_URL}/registro`, userData);
+
+        // Redirige al usuario después del registro exitoso
+        try {
+        Register(userData, navigate, setError, setLoading);
+        navigate('/registro');
+      } catch (error) {
+        console.error('Error al registrar:', error);
+        setError('Error al registrar. Intente nuevamente más tarde.');
+        setLoading(false);
+      }
+    }
   };
 
   return (
@@ -28,35 +64,56 @@ const Register = () => {
       <h1>Register</h1>
       <input
         type="text"
-        placeholder="Nombre"
+        placeholder="Name"
+        name="first Name"
         value={userData.firstName}
-        onChange={(e) => setUserData({ ...userData, firstName: e.target.value })}
+        onChange={handleInputChange}
       />
-      <input
+       <input
         type="text"
-        placeholder="Apellido"
-        value={userData.lastName}
-        onChange={(e) => setUserData({ ...userData, lastName: e.target.value })}
+        placeholder="Lastname"
+        name="Last name"
+        value={userData.firstName}
+        onChange={handleInputChange}
       />
-      <input
-        type="email"
-        placeholder="Correo electrónico"
-        value={userData.email}
-        onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+       <input
+        type="text"
+        placeholder="email"
+        name="email"
+        value={userData.firstName}
+        onChange={handleInputChange}
       />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={userData.password}
-        onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+        <input
+        type="text"
+        placeholder="password"
+        name="password"
+        value={userData.firstName}
+        onChange={handleInputChange}
       />
-      <input
-        type="password"
-        placeholder="Confirmar contraseña"
-        value={userData.confirmPassword}
-        onChange={(e) => setUserData({ ...userData, confirmPassword: e.target.value })}
+       <input
+        type="text"
+        placeholder="password"
+        name="password"
+        value={userData.firstName}
+        onChange={handleInputChange}
       />
-      <button onClick={handleRegister}>Registrarse</button>
+       <input
+        type="text"
+        placeholder="confirm password"
+        name="confirm password"
+        value={userData.firstName}
+        onChange={handleInputChange}
+      />
+      <ReCAPTCHA sitekey="6Ld-XUwoAAAAANKhx2Py2ot3CvMMKN28MEGptiRI" onChange={(value) => setRecaptchaValue(value)} />
+      <button onClick={handleRegister} disabled={loading}>
+        {loading ? 'Registrando...' : 'Registrar'}
+      </button>
+      {error && (
+        <div className="bg-red-900 bg-red-900 text-white px-4 py-3 rounded mt-4">
+          <strong className="font-bold">Error:</strong>
+          <span className="block">{error}</span>
+        </div>
+      )}
     </div>
   );
 };

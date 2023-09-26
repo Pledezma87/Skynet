@@ -6,7 +6,7 @@ const formSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 100,
+    maxlength: 80,
     lowercase: true,
     validate: {
       validator: function (value) {
@@ -20,10 +20,9 @@ const formSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 80,
+    maxlength: 100,
     validate: {
       validator: function (value) {
-        // Utiliza una expresión regular para permitir solo letras
         return /^[a-zA-Z]+$/.test(value);
       },
       message: "Solo se permiten letras en el nombre.",

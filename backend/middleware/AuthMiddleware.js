@@ -1,30 +1,29 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from "bcrypt";
+import { verifyToken } from './AuthUser.js';
 
 dotenv.config();
 const secretKey = process.env.SECRET_KEY 
 const tokenExpirationTime = 3 * 60 * 60 * 1000
+
 
 export const requireAuth = (req, res, next) => {
   const token = req.header('Authorization');
 
   // Verifica si se proporcionó un token
   if (!token) {
-    return res.status(401).json({ message: 'Acceso no autorizado.' });
+    return res.status(401).json({ message: 'token no proporcionado.' });
   }
 
   try {
     // Verifica el token
-    const decodedToken = jwt.verify(token, 'secretKey'); // Reemplaza 'secret_key' con tu clave secreta
+    const decodedToken = verifyToken(token, 'secretKey');
 
-    // Agrega el usuario autenticado al objeto de solicitud
     req.user = decodedToken;
 
-    // Continúa con la siguiente función de middleware
     next();
   } catch (error) {
-    console.error(error);
     res.status(401).json({ message: 'Token no válido.' });
   }
 };
@@ -35,8 +34,9 @@ export const generateToken = (req) => {
         const {_id, email, role} = req
         const createToken = jwt.sign ( {_id, email, role}, secretKey, {expressIn:tokenExpirationTime})
         req.token= createToken
+        return createToken 
       } catch (error) {
-        console.error ("error al generar token ")
+        console.error ("error al generar token:", error)
       }
     }
 

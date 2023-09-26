@@ -26,26 +26,20 @@ export const login = async (req, res) => {
 };
 
 // Crear (Create) - crear usuarios
-export const createUser = async (req, res, next) => {
-  console.log("entra crear usuario")
+export const createUser = async (req, res) => {
   try {
     const user = new User(req.body);
-  try {
+
     const usersave = await user.save();
-    console.log(usersave)
     res.status(200).json(usersave);
-  } catch (error) {
-    console.log(error)
-  }
 
   } catch (error) {
-    console.log(error)
     res.status(500).json({ message: "Error al crear el usuario." });
   }
 };
 
 // Leer (Read) - Obtener todos los usuarios
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -89,7 +83,6 @@ export const deleteUserById = async (req, res) => {
   const { id } = req.params;
   try {
     const deletedUser = await User.findByIdAndDelete(id);
-    console.log(deletedUser)
     if (!deletedUser) {
       return res.status(404).json({ message: "Usuario no encontrado." });
     }
