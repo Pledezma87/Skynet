@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import "tailwindcss/tailwind.css";
-import HeaderLoginRegister from "../components/header/HeaderLoginRegister.jsx";
 import {login} from "../utils/Api.js";
+import HeaderLoginRegister from '../components/header/HeaderLoginRegister.jsx';
+
 
 function Login() {
 

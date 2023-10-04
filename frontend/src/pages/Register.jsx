@@ -20,7 +20,7 @@ function Register() {
 
   return (
     <div>
-      <HeaderLoginRegister />
+      <HeaderLoginRegister/>
       <div className="bg-[#121212] min-h-screen flex items-center justify-center">
         <div className="bg-[#121212] p-8 rounded shadow-md w-96">
           <h2 className="border border-red-700 text-2xl text-red-900 font-bold mb-6 text-center">Register</h2>
